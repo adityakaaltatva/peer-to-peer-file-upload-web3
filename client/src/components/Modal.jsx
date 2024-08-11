@@ -6,18 +6,23 @@ const Modal = ({ setModalOpen, contract }) => {
   const [accessList, setAccessList] = useState([]);
 
   const sharing = async () => {
+    const address = document.querySelector(".address").value;
     if (address) {
       try {
-        await contract.allow(address);
+        const tx = await contract.grantAccess(address); // Use the correct function name
+        await tx.wait(); // Wait for the transaction to be mined
+        alert("Successfully shared access.");
         setModalOpen(false);
       } catch (error) {
         console.error("Error sharing access:", error);
-        alert("Failed to share access.");
+        alert(`Failed to share access. Reason: ${error.message}`);
       }
     } else {
-      alert("Please enter an address.");
+      alert("Please enter a valid address.");
     }
   };
+  
+  
 
   useEffect(() => {
     const fetchAccessList = async () => {

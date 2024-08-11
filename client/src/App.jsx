@@ -28,7 +28,7 @@ function App() {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         setAccount(address);
-        let contractAddress = "Your Contract Address Here";
+        let contractAddress = "0xbDA5747bFD65F08deb54cb465eB87D40e51B197E";
 
         const contract = new ethers.Contract(
           contractAddress,
